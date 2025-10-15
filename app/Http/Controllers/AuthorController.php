@@ -8,7 +8,7 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::withCount('books')->orderBy('name')->get();
         return view('authors.index', compact('authors'));
     }
 }

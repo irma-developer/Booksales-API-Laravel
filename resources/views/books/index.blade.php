@@ -2,47 +2,47 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Daftar Genre</title>
+    <title>Daftar Buku</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Segoe UI, Arial, sans-serif;
+            margin: 24px;
             background: #f9fafb;
-            margin: 0;
-            padding: 30px;
-            color: #111827;
         }
         nav {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         nav a {
             text-decoration: none;
             color: #2563eb;
             font-weight: 500;
-            margin-right: 16px;
+            margin-right: 20px;
+            transition: 0.2s;
         }
         nav a:hover {
             text-decoration: underline;
         }
+        nav a:visited {
+            color: #2563eb; /* tetap biru meski sudah diklik */
+        }
         h1 {
-            font-size: 24px;
             margin-bottom: 20px;
-            color: #1f2937;
         }
         table {
             border-collapse: collapse;
-            width: 60%;
+            width: 90%;
             background: #fff;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-        }
-        thead {
-            background: #2563eb;
-            color: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,.08);
         }
         th, td {
             padding: 12px 16px;
             text-align: left;
+        }
+        thead {
+            background: #2563eb;
+            color: white;
         }
         tr:nth-child(even) {
             background: #f3f4f6;
@@ -59,22 +59,28 @@
         <a href="{{ route('books.index') }}">Books</a>
     </nav>
 
-    <h1>Daftar Genre</h1>
+    <h1>Daftar Buku</h1>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nama Genre</th>
+                <th>Judul</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Tahun</th>
             </tr>
         </thead>
         <tbody>
-        @foreach ($genres as $g)
-            <tr>
-                <td>{{ $g['id'] }}</td>
-                <td>{{ $g['name'] }}</td>
-            </tr>
-        @endforeach
+            @foreach ($books as $b)
+                <tr>
+                    <td>{{ $b->id }}</td>
+                    <td>{{ $b->title }}</td>
+                    <td>{{ $b->author->name ?? '-' }}</td>
+                    <td>{{ $b->genre }}</td>
+                    <td>{{ $b->published_year }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </body>
